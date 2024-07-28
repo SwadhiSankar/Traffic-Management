@@ -17,7 +17,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class NewTicketComponent {
   @ViewChild('form') form?: ElementRef<HTMLFormElement>;
-
+  enteredTitle = '';
+  enteredText = '';
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
   add = output<{ title: string; text: string }>();
   ngOnInit() {
@@ -28,13 +29,21 @@ export class NewTicketComponent {
     console.log('After View Init');
     console.log(this.form?.nativeElement);
   }
-  onSubmit(titleElement: string, ticketText: string) {
-    console.log(titleElement);
-    console.log(ticketText);
-    this.form?.nativeElement.reset();
-    this.add.emit({
-      title: titleElement,
-      text: ticketText,
-    });
+  // onSubmit(titleElement: string, ticketText: string) {
+  //   console.log(titleElement);
+  //   console.log(ticketText);
+  //   this.form?.nativeElement.reset();
+  //   this.add.emit({
+  //     title: titleElement,
+  //     text: ticketText,
+  //   });
+  // }
+
+  //using two way binding
+  onSubmit() {
+    this.add.emit({ title: this.enteredTitle, text: this.enteredText });
+    //to clear we can also send back them some values
+    this.enteredText = '';
+    this.enteredTitle = '';
   }
 }
