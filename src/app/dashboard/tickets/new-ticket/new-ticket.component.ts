@@ -1,4 +1,10 @@
-import { Component, ElementRef, viewChild, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  output,
+  viewChild,
+  ViewChild,
+} from '@angular/core';
 import { ControlComponent } from '../../../shared/control/control.component';
 import { FormsModule } from '@angular/forms';
 
@@ -13,7 +19,7 @@ export class NewTicketComponent {
   @ViewChild('form') form?: ElementRef<HTMLFormElement>;
 
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
-
+  add = output<{ title: string; text: string }>();
   ngOnInit() {
     console.log('On Init');
     console.log(this.form?.nativeElement);
@@ -26,5 +32,9 @@ export class NewTicketComponent {
     console.log(titleElement);
     console.log(ticketText);
     this.form?.nativeElement.reset();
+    this.add.emit({
+      title: titleElement,
+      text: ticketText,
+    });
   }
 }
