@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import { Ticket } from './ticket.model';
-import { TicketComponent } from "./ticket/ticket.component";
+import { TicketComponent } from './ticket/ticket.component';
 
 @Component({
   selector: 'app-tickets',
@@ -21,5 +21,15 @@ export class TicketsComponent {
       status: 'open',
     };
     this.tickets.push(ticket);
+  }
+
+  onCloseTicket(id: string) {
+    this.tickets = this.tickets.map((ticket) => {
+      if (ticket.id === id) {
+        return { ...ticket, status: 'closed' };
+        //...ticket will have existing value and we are overrding status value
+      }
+      return ticket;
+    });
   }
 }
