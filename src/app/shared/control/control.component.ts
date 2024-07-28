@@ -37,6 +37,10 @@ export class ControlComponent {
     contentChildren<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(
       'input'
     );
+
+  ngAfterContentInit() {
+    console.log(this.control);
+  }
   onClick() {
     console.log('clicked');
     console.log(this.el);
